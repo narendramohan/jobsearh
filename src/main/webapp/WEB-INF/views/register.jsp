@@ -53,7 +53,7 @@
  </head>
  <body>
   <h2>Register User</h2>
-  <form:form method="POST" action="/jobserach/spring/register" onsubmit="return validateForm();">
+  <form:form method="POST" action="/jobsearch/spring/register" onsubmit="return validateForm();">
       <table border="1" style="border-color: teal; border-width: 1pt;border-spacing: 0pt">
        <tr style="background: teal;">
            <td><form:label path="name">User Name:</form:label></td>

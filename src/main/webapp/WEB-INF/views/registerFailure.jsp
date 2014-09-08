@@ -25,7 +25,7 @@ background-color:#cccccc;
 </style>
 </head>
 <body>
-	<h2>User registration is unsuccessful. Please <a href="<%=request.getContextPath()%>/register">register</a> again.</h2>
-	<h3>To login please <a href="<%=request.getContextPath()%>/auth/login-user">click here</a>.</h3>
+	<h2>User registration is unsuccessful. Please <a href="<%=request.getContextPath()%>/spring/register">register</a> again.</h2>
+	<h3>To login please <a href="<%=request.getContextPath()%>/spring/">click here</a>.</h3>
 </body>
 </html>

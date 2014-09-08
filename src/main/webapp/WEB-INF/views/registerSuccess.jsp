@@ -25,6 +25,6 @@ background-color:#cccccc;
 </style>
 </head>
 <body>
-	User registration is successful. Please <a href="<%=request.getContextPath()%>/auth/login-user">login</a> again
+	User registration is successful. Please <a href="<%=request.getContextPath()%>/spring/">login</a> again
 </body>
 </html>

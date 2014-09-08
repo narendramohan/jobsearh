@@ -111,26 +111,25 @@ public class HomeController {
 		// This will resolve to /WEB-INF/jsp/deniedpage.jsp
 		return "deniedpage";
 	}
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	@RequestMapping(value = "/register", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView registerUser(@RequestParam(value="error", required=false) boolean error, ModelMap model, @ModelAttribute("command") UserBean userBean,
 			BindingResult result) {
 		User user = prepareModel(userBean);
 		user.setType(0);
 		try {
-			boolean exists = userService.isUserExists(user.getLoginId());
-			if(!exists) {
-				boolean emailExists = userService.isEmailExists(user.getEmail());
-				if(!emailExists) {
-					userService.addUser(user);
-				} else {
-					model.addAttribute("error", "This email id already exists.");
-					return new ModelAndView("register"); 
-				}
-			} else {
-				model.addAttribute("error", "User already exists.");
-				return new ModelAndView("register"); 
+			if(user.getLoginId()==null) {
+				return new ModelAndView("register");
 			}
-			return new ModelAndView("registerSuccess");
+			boolean exists = userService.isUserExists(user.getLoginId());
+			if(exists) {		
+				model.addAttribute("error", "User already exists.");
+				return new ModelAndView("register");	
+			} else {
+				
+				userService.addUser(user);
+				return new ModelAndView("registerSuccess");
+			}
+			
 		} catch(Exception e){
 			e.printStackTrace();
 			return new ModelAndView("registerFailure");
