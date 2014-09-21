@@ -74,7 +74,7 @@ public class HomeController {
             return "login-page";
         } else if (loginForm.getUserId() != null && loginForm.getPassword() != null) {
 			User user = userService.loginUser(loginForm);
-			logger.debug(user.toString());
+			logger.debug(user+"");
 			
 			if (user != null && user.getStatus()!=1) {
 				if (session.getAttribute("userName") == null) {

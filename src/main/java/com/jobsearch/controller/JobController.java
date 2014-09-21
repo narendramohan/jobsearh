@@ -1,6 +1,6 @@
 package com.jobsearch.controller;
 
-import java.util.List;
+import java.util.List; 
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ public class JobController {
 			.getLogger(JobController.class);
 
 	@Autowired
-	JobService jobService;
+	JobService jobService; 
 	
 	@Autowired
 	SearchService searchService;
@@ -54,11 +54,11 @@ public class JobController {
 	@RequestMapping(value = "/saveJob", method = {RequestMethod.GET, RequestMethod.POST})
 	public String saveJob(Model model, @ModelAttribute("command") Search search){
 		jobService.createJob(search);
-		return "home";
+		return "searchPage";
 	}
 	@RequestMapping(value = "/searchJob", method = {RequestMethod.GET, RequestMethod.POST})
 	public String searchJob(Model model, @ModelAttribute("command") Search search){
-		jobService.createJob(search);
+		//jobService.createJob(search);
 		return "searchPage";
 	}
 }

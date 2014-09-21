@@ -106,25 +106,25 @@ public class LuceneSearch {
 		IndexWriter iwriter = getIndexWriter();
 		for (Search srch : search) {
 			Document doc = new Document();
-			Field pathField = new StringField("keyword", srch.getKeyword(),
+			Field pathField = new StringField("keyword", srch.getKeyword()==null?"":srch.getKeyword(),
 					Field.Store.YES);
 			doc.add(pathField);
-			pathField = new StringField("jobTitle", srch.getJobTitle(),
+			pathField = new StringField("jobTitle", srch.getJobTitle()==null?"":srch.getJobTitle(),
 					Field.Store.YES);
 			doc.add(pathField);
-			pathField = new StringField("jobType", srch.getJobTitle(),
+			pathField = new StringField("jobType", srch.getJobType()==null?"":srch.getJobType(),
 					Field.Store.YES);
 			doc.add(pathField);
-			pathField = new StringField("exp", srch.getExp(), Field.Store.YES);
+			pathField = new StringField("exp", srch.getExp()==null?"":srch.getExp(), Field.Store.YES);
 			doc.add(pathField);
-			pathField = new StringField("location", srch.getLocation(),
+			pathField = new StringField("location", srch.getLocation()==null?"":srch.getLocation(),
 					Field.Store.YES);
 			doc.add(pathField);
 			pathField = new IntField("MinSal", Integer.parseInt(srch
-					.getExpectedSal()), Field.Store.YES);
+					.getExpectedSal()==null?"":srch.getExpectedSal()), Field.Store.YES);
 			doc.add(pathField);
 			pathField = new IntField("MaxSal", Integer.parseInt(srch
-					.getMaxSal()), Field.Store.YES);
+					.getMaxSal()==null?"":srch.getMaxSal()), Field.Store.YES);
 			doc.add(pathField);
 			iwriter.addDocument(doc);
 		}
