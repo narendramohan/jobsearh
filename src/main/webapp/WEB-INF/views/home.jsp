@@ -54,8 +54,8 @@ function openTab(obj, tab){
 		<a style="text-decoration: none;" href="<%=request.getContextPath()%>/spring/logout"><font style="padding-left : 20px;" size="3" color="white">Logout</font></a>
 	</div>
 	<div class="menu4">
-    <a href="#1" onclick="openTab(this, 'createJob')" class="current"><span>Create Job</span></a>
-    <a href="#2" onclick="openTab(this, 'searchJob')"><span>Search Job</span></a>
+    <a href="#1" onclick="openTab(this, 'searchJob')" class="current"><span>Search Job</span></a>
+    <a href="#2" onclick="openTab(this, 'createJob')"><span>Create Job</span></a>
 
 </div>
 <div class="menu4sub">

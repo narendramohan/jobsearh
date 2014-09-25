@@ -20,7 +20,7 @@ var json = JSON.parse(data);
 $('#DynamicGridLoading').hide();
 $('#DynamicGrid').append(CreateDetailView(data, "lightPro", true)).fadeIn();
 $("#button").click(function(){
-    window.location.href='/jobsearch/spring';
+    window.location.href='/jobsearch/spring/searchJob';
 });
 });
 </script>

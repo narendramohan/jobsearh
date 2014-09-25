@@ -82,5 +82,5 @@ function CreateDetailView(objArray, theme, enableHeader) {
     return str;
 }
 function goback(){
-	window.location.href='/jobsearch/spring/';
+	window.location.href='/jobsearch/spring/searchJob';
 }

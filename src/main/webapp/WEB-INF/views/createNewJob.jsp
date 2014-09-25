@@ -107,6 +107,20 @@
 							<em class="dispBlk">Skills, Designation etc.</em>
 						</p>
 					</div>
+					<div class="row_frm" id="divid_qp">
+						<label for="keywds">Company Name:</label>
+						<p>
+							<form:input type="text" path="company" id="qp" class="text"
+								onkeypress="removeError(new Array('qp','ql','eo','idqi'),'form',1);"
+								onfocus="tooltip('Company Name.', this);" value=""
+								autocomplete="off" />
+							<script>
+								if (a)
+									createAutoSuggest('qp', 'form3', 'autosuggest');
+							</script>
+							<em class="dispBlk">Enter Company Name</em>
+						</p>
+					</div>
 					<div class="row_frm">
 						<label for="exp">Job Title:</label>
 						<p>
@@ -247,7 +261,19 @@
 							</form:select> <em>In Lakhs</em>
 						</p>
 					</div> 
-					
+					<div class="row_frm" id="divid_qp">
+						<label for="keywds">Company Name:</label>
+						<p>
+							<form:textarea path="jobDescription"  class="text" 
+								onfocus="tooltip('Job Description.', this);" value=""
+								autocomplete="off" />
+							<script>
+								if (a)
+									createAutoSuggest('qp', 'form3', 'autosuggest');
+							</script>
+							<em class="dispBlk">Enter Job Description</em>
+						</p>
+					</div>					
 					<div class="sp20"></div>
 					<div class="srcBt">
 						<button id="search" type="submit">

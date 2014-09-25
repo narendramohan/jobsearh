@@ -33,6 +33,7 @@ import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 
 import com.google.gson.Gson;
 import com.jobsearch.model.Job;
@@ -157,23 +158,39 @@ public class LuceneSearch {
 				Job job=null;
 				for (int i = 0; i < hits.length; i++) {
 					Document hitDoc = isearcher.doc(hits[i].doc); // getting actual document
-					boolean bjT=false;
-					boolean bjtt=false;
-					boolean bloc=false;
-					boolean bexp=false;
-					boolean bmsal=false;
-					boolean besal=false;
+					job=new Job();
+					job.setKeyword(hitDoc.get("keyword"));
+					boolean bjT=!StringUtils.isEmpty(search.getJobType());
+					boolean bjtt=!StringUtils.isEmpty(search.getJobTitle());
+					boolean bloc=!StringUtils.isEmpty(search.getLocation());
+					boolean bexp=!StringUtils.isEmpty(search.getExp());
+					boolean bmsal=!StringUtils.isEmpty(search.getMaxSal());
+					boolean besal=!StringUtils.isEmpty(search.getExpectedSal());
 					String exp = search.getExp();
 					//if(StringUtil)
 					
 					System.out.println(hitDoc.get("keyword"));
+					if(bjT && !search.getJobType().equalsIgnoreCase(hitDoc.get("jobType"))){
+						continue;
+					}
+					if(bjtt && !search.getJobTitle().equalsIgnoreCase(hitDoc.get("jobTitle"))){
+						continue;
+					}
+					if(bloc && !search.getLocation().equalsIgnoreCase(hitDoc.get("location"))){
+						continue;
+					}
+					if(bexp && ! (Integer.parseInt(search.getExp()) <= Integer.parseInt(hitDoc.get("exp")))){
+						continue;
+					}
+					
+					if(besal && !(Integer.parseInt(search.getExpectedSal()) <= Integer.parseInt(hitDoc.get("MinSal")))){
+						continue;
+					}
 					int jobType = Integer.parseInt(hitDoc.get("jobType"));
 					int jobTitle = Integer.parseInt(hitDoc.get("jobTitle"));
-					job=new Job();
-					job.setKeyword(hitDoc.get("keyword"));
-					if(exp!=null && exp.trim().equals(hitDoc.get("exp")))
+					
 					job.setExp(hitDoc.get("exp"));
-					job.setExpectedSal(hitDoc.get("MinSal")+ " "+hitDoc.get("MaxSal"));
+					job.setExpectedSal(hitDoc.get("MinSal")+ " to "+hitDoc.get("MaxSal")+ " in lacs");
 					job.setJobTitle(JobTitle.get(jobTitle).title());
 					job.setJobType(JobType.get(jobType).type());
 					job.setLocation(hitDoc.get("location"));
@@ -181,10 +198,8 @@ public class LuceneSearch {
 				}
 				
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 
@@ -192,11 +207,14 @@ public class LuceneSearch {
 					try {
 						isearcher.getIndexReader().close();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 			}
-		String jsonString = new Gson().toJson(jobList);
+			String jsonString="";
+			if(jobList.size()>0)
+				jsonString = new Gson().toJson(jobList);
+			else
+				jsonString = "[{\"keyword\":\""+search.getKeyword()+"\",\"jobTitle\":\" \",\"jobType\":\" \",\"location\":\" \",\"expectedSal\":\" \"}]";
 		logger.debug(jsonString);
 		return jsonString;
 	}

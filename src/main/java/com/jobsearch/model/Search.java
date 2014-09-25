@@ -29,6 +29,10 @@ public class Search {
 	String expectedSal;
 	@Column(name = "maxSal")
 	String maxSal;
+	@Column (name="company")
+	String company;
+	@Column(name="jobDescription")
+	String jobDescription;
 	
 	public String getMaxSal() {
 		return maxSal;
@@ -95,6 +99,27 @@ public class Search {
 		this.keyword = keyword;
 	}
 	
+	
+	public String getCompany() {
+		return company;
+	}
+
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+
+	public String getJobDescription() {
+		return jobDescription;
+	}
+
+
+	public void setJobDescription(String jobDescription) {
+		this.jobDescription = jobDescription;
+	}
+
+
 	public String toString(){
 		return jobId+" "+exp+" "+expectedSal+" "+jobTitle+" "+jobType+" "+keyword+" "+location+" "+maxSal; 
 	}
